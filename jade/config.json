@@ -1,7 +1,0 @@
-{
-  "groq_model": "meta-llama/llama-4-scout-17b-16e-instruct",
-  "audio_model": "whisper-large-v3",
-  "caption_model": "Salesforce/blip-image-captioning-large",
-  "max_context": 12,
-  "language": "pt"
-}

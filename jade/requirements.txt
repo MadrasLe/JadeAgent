@@ -1,1 +1,0 @@
-!pip install -q groq gtts transformers Pillow scipy torch torchvision
