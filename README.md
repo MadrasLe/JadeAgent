@@ -2,75 +2,141 @@
 
 # J.A.D.E. (Joint Agent Decision Engine)
 
-J.A.D.E. is a comprehensive ecosystem of specialized AI agents designed to handle diverse tasks ranging from complex reasoning and coding to autonomous education and multimodal interaction. This repository houses the various components of the J.A.D.E. project, demonstrating cutting-edge agent orchestration architectures.
-
-## Live Demo
-Check out the live demo here: **[J.A.D.E. Live Demo](https://gabrielyukio2205-lgtm.github.io/github.io/)**
+J.A.D.E. is a modular framework for orchestrating autonomous AI agents. It implements specific architectures for multimodal interaction, automated code generation, and complex reasoning tasks using open-source models (via Groq).
 
 ---
 
-## 🏗️ Jade Heavy: Advanced Reasoning Orchestrator
-
-**Jade Heavy** represents the pinnacle of our agent orchestration research. It utilizes a sophisticated combination of **Tree of Thoughts (ToT)**, **Mixture of Agents (MoA)**, and **Chain of Thought (CoT)** architectures to solve highly difficult problems that stump traditional single-model approaches.
-
-By spawning multiple reasoning branches and having agents critique and refine each other's outputs, Jade Heavy achieves state-of-the-art performance even with smaller underlying models.
-
-### Preliminary Results
-
-Jade Heavy has shown remarkable results in early benchmarks, significantly outperforming base models:
-
-*   **Jade Heavy Low (3 branches)**:
-    *   Achieved **~87% accuracy** on **GPQA Diamond**.
-    *   *Note*: This result was achieved using weaker open-source models that typically perform in the 60-70% range on this benchmark.
-*   **Jade Heavy High (7 branches)**:
-    *   Achieved **94-95% accuracy** on subset samples.
-
-This demonstrates the power of the **Joint Agent Decision Engine** architecture in amplifying the reasoning capabilities of open-source models through effective orchestration.
+##  Live Demo
+**Interact with J.A.D.E. directly in your browser:**
+### [👉 Launch Live Demo 👈](https://gabrielyukio2205-lgtm.github.io/github.io/)
 
 ---
 
-##  Agent Ecosystem
+## 🏗️ Jade Heavy: Cognitive Orchestration
 
-The J.A.D.E. repository contains several specialized agents, each capable of operating autonomously or as part of the larger system.
+**Jade Heavy** is an orchestration layer that decouples reasoning from direct model generation. Instead of relying on a single inference pass, it constructs a dynamic graph of thought processes.
 
-### J.A.D.E. (Multimodal)
-*Located in: `jade3/`*
+### Architecture: ToT + MoA + CoT
+The system implements a hybrid architecture:
+1.  **Tree of Thoughts (ToT)**: The engine spawns multiple concurrent execution branches. Each branch explores a distinct solution path for the given problem.
+2.  **Mixture of Agents (MoA)**: Specialized agent personas (e.g., "Critic", "Synthesizer") are injected into these branches to validate intermediate steps.
+3.  **Chain of Thought (CoT)**: Strict prompting enforces step-by-step logic within each node of the tree.
 
-The flagship multimodal interaction agent, designed with a J.A.D.E persona. It integrates vision and audio models to create a seamless natural interface for original non-multimodal models.
+### Preliminary Benchmarks (GPQA Diamond)
+*Performance metrics using open-source models(kimi k2/gpt 120b oss/DeepSeek/Mistral):*
 
-*   **Core Capabilities**:
-    *   **Vision-First Architecture**: Uses **BLIP (Salesforce/blip-image-captioning-large)/Florence 2** to "see" and describe images in real-time. It can analyze visual context and integrate it into its reasoning stream.
-    *   **Natural Voice Interface**:
-        *   **Hearing**: Processes audio inputs (integration ready via Groq/WhisperV3).
-        *   **Speaking**: Features a simple TTS engine using **gTTS** with auto-play capabilities in Jupyter/Colab environments, allowing J.A.D.E. to vocalize responses instantly.
-        *   **ShoreStone Memory System**: A persistent memory architecture with a **Heuristic Curator**.
-        *   **Self-Maintenance**: The agent autonomously runs a "sleep cycle" (maintenance interval) every 10 interactions.
-        *   **RFR-Score**: Uses a formula (Recency, Frequency, Relevance) to score memories, deciding what to keep, what to forget, and what to archive, mimicking human long-term memory consolidation.
-        *   **Geometric Relevance**: Uses cosine similarity to find "neighborhoods" of related memories, ensuring contextually rich responses.
+*   **Jade Heavy Low(Without Tool) (3 Branches)**:
+    *   **Accuracy**: **~85-87%**
+    *   **Significance**: Achieves results comparable to proprietary frontier models, significantly outperforming the 60-70% baseline of the underlying base models.
+*   **Jade Heavy High(with Tools) (7 Branches)**:
+    *   **Accuracy**: **94-95%** (on subset samples)
+    *   **Mechanism**: The higher branch count increases the probability of finding a correct solution path in the search space, which the consensus mechanism then selects.
 
-###  Jade Scholar
-*Located in: `JadeScholar/`*
+---
 
-An autonomous educational agent designed to act as a personal AI tutor. It processes learning materials from various sources and converts them into interactive study formats.
-*   **Features**:
-    *   Ingests **PDFs**, **URLs**, and **Text**.
-    *   Generates **didactic summaries** using a "Professor" persona.
-    *   Creates and narrates **Podcasts** featuring distinct voices (e.g., Gabriel and Berta) using multi-speaker TTS and **Pydub** for audio mixing.
-    *   Generates and conducts **interactive quizzes** to test your knowledge.
-*   **Stack**: Groq (Llama 3), gTTS, pypdf, BeautifulSoup.
+## 🧩 Technical Architecture by Module
 
+### 1. 💻 CodeJade (`code_jade/`)
+*Autonomous Software Engineering Agent*
 
-### CodeJade: The Autonomous Software Engineer
-*Located in: `code_jade/`*
+CodeJade is designed to close the loop between code generation and execution.
 
-CodeJade is a coding assistant; it is a autonomous software engineering agent built to operate within local environments or Google Colab to help. It bridges the gap between LLM code generation and safe, practical code execution.
+*   **Execution Environment (`ToolManager`)**:
+    *   **`execute_shell(command)`**: Runs bash commands via `subprocess` with a configurable timeout to prevent hanging processes.
+    *   **`run_python(code)`**: Executes Python code in a restricted namespace.
+        *   *Security*: The global dictionary is limited to `__builtins__`, `math`, `json`, and `os` (restricted). It prevents access to the agent's internal state instances.
+    *   **`_confirm(action, content)`**: A safety gate that requires user approval for high-risk actions (`write_file`, shell execution) when `safe_mode` is enabled.
 
-*   **Architecture**:
-    *   **ToolManager**: A dedicated orchestration layer that handles filesystem operations (`write_file`, `read_file`, `list_files`), shell command execution, and python script execution. It abstracts the OS complexity from the language model.
-    *   **Context-Aware**: Implements a sliding window memory system that manages token usage effectively, allowing for prolonged coding sessions without losing the thread of the conversation.(future update with ShoreStoneSWE)
-    *   **Parsing**: Uses advanced regex-based parsing to reliably extract JSON tool calls from LLM responses, ensuring stability even when models hallucinate formatting inconsistencies.
+*   **The Guardian (`CodeReviewer`)**:
+    *   Intercepts every `write_file` attempt.
+    *   **Workflow**: The content is sent to a secondary LLM instance with a dedicated System Prompt focusing on security (SQLi, Arbitrary Execution) and logic bugs.
+    *   **Protocol**: The reviewer must return a strict JSON payload `{ "status": "APPROVED" | "REJECTED", "feedback": "..." }`. Rejections block the file write and feed the error back to the coding agent for self-correction.
 
-*   **Safety & Security**:
-    *   **Guardian CodeReviewer**: A secondary, specialized "Engineer" agent (`reviewer.py`) intercepts every file modification request. It performs a rigorous static analysis to check for logic bugs, security vulnerabilities (like SQL injection or unsafe exec usage), and code quality before any change is committed to the disk.
-    *   **Sandboxed Execution**: Python code execution is confined to a restricted global scope, preventing accidental damage to the host system while still allowing necessary imports like `os`, `json`, and `math`.
-    *   **Human-in-the-Loop**: The system includes a confirmation step (`_confirm`) for critical actions (Shell, File Write, Code Exec), giving the user final authority over what the agent does.
+*   **Resiliency**:
+    *   **Parsing**: Uses regex `r'\{.*\}'` with `re.DOTALL` to robustly extract JSON tool calls buried in verbose LLM text or Markdown blocks.
+    *   **Memory**: Implements a sliding window context manager (`_manage_memory`) that preserves the System Prompt while truncating the oldest message pairs to fit within the context window (default: 20 turns).
+
+### 2. J.A.D.E. Multimodal (`jade3/`)
+*Interactive Voice & Vision Agent*
+
+*   **Cognitive Loop (`JadeAgent.respond`)**:
+    1.  **Remember**: Queries `ShoreStoneMemory` for semantically relevant past interactions.
+    2.  **See**: If an image is present, `ImageHandler` generates a caption using BLIP.
+    3.  **Respond**: Generates text response via Groq.
+    4.  **Memorize**: Stores the new interaction embedding.
+    5.  **Maintain**: Every `maintenance_interval` (10 turns), triggers the Heuristic Curator.
+
+*   **ShoreStone Memory System (`shorestone.py`)**:
+    *   **Vector Store**: Uses `chromadb.PersistentClient` for local storage.
+    *   **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2` generates 384-dimensional vectors.
+    *   **Compression**: Supports optional PCA (Principal Component Analysis) via `joblib` to reduce vector dimensionality if a model is trained.
+
+*   **Heuristic Curator (`curator_heuristic.py`)**:
+    *   Implements the **RFR-Score** algorithm to decide which memories to keep:
+        $$ Score = \alpha \cdot \log(1+Frequency) + \beta \cdot e^{-\lambda \cdot Recency} + \gamma \cdot Relevance $$
+    *   **Geometric Relevance**: Calculates cosine similarity to find the "neighborhood" of a memory. Isolated memories (low similarity to others) are penalized.
+
+### 3. 🎓 Jade Scholar (`JadeScholar/`)
+*Graph-Based Educational Agent*
+
+*   **Graph State (`GraphState`)**:
+    *   A shared data object that flows between agents, holding `raw_content`, `summary`, `script`, and `quiz_data`.
+    
+*   **Pipeline**:
+    1.  **Ingestion**: `IngestAgent` detects `http` vs `.pdf` paths.
+    2.  **Synthesis**: `ProfessorAgent` transforms raw text into didactic summaries using structured Markdown prompts.
+    3.  **Scripting**: `ScriptwriterAgent` generates a JSON list of dialogue objects `[{"speaker": "Gabriel", "text": "..."}]`.
+    4.  **Audio Synthesis**: The `ToolBox.generate_audio_mix` method iterates through the script. It uses `gTTS` for base audio and `pydub` to merge segments, applying silence intervals for pacing.
+    5.  **Evaluation**: `ExaminerAgent` creates a quiz JSON and runs a terminal-based interactive loop.
+
+---
+
+##  Installation & Dependencies
+
+### Prerequisites
+*   **Python 3.8+**
+*   **FFmpeg**: Required for audio processing (`pydub`/`gTTS`).
+    *   `sudo apt-get install ffmpeg` (Debian/Ubuntu)
+
+### Setup Steps
+
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/your-username/jade-agents.git
+    cd jade-agents
+    ```
+
+2.  **Install Python Packages**:
+    ```bash
+    pip install groq pypdf gtts pydub beautifulsoup4 requests fpdf chromadb sentence-transformers joblib scikit-learn transformers torch pillow
+    ```
+
+3.  **Configure Credentials**:
+    Set your Groq API key in your environment variables:
+    ```bash
+    export GROQ_API_KEY="gsk_..."
+    ```
+
+---
+
+## ⚙️ Configuration Reference
+
+### `jade3/config.json`
+| Key | Default | Description |
+| :--- | :--- | :--- |
+| `groq_model` | `moonshotai/kimi-k2-instruct-0905` | The LLM inference engine. |
+| `language` | `pt/en` | TTS and System Prompt language. |
+| `maintenance_interval` | `10` | Interaction turns before running memory curation. |
+| `caption_model` | `Salesforce/blip...` | HuggingFace model ID for vision. |
+
+### `code_jade/config.json`
+| Key | Default | Description |
+| :--- | :--- | :--- |
+| `safe_mode` | `true` | If true, asks for Y/N confirmation before shell/file ops. |
+| `work_dir` | `./workspace` | Directory sandbox for file creation. |
+| `max_context` | `20` | Sliding window size (number of messages). |
+
+---
+
+## 📜 License
+
