@@ -1,0 +1,1 @@
+!pip install -q groq gtts transformers Pillow scipy torch torchvision chromadb sentence-transformers ipython gradio

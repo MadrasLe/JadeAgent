@@ -1,0 +1,9 @@
+{
+  "groq_model": "meta-llama/llama-4-maverick-17b-128e
+instruct",
+  "audio_model": "whisper-large-v3",
+  "caption_model": "Salesforce/blip-image-captioning-large",
+  "max_context": 12,
+  "language": "pt",
+  "local_mode": false 
+}
