@@ -2,71 +2,104 @@
 
 # Jade Agents
 
-Este repositório contém diferentes agentes de IA desenvolvidos com propósitos específicos, utilizando a API da Groq para inferência rápida.
+## LIVE DEMO: https://gabrielyukio2205-lgtm.github.io/github.io/
+
+This repository hosts a collection of specialized AI agents developed for distinct purposes, leveraging the Groq API for ultra-fast inference and high-performance capabilities.
 
 ---
 
-## 🤖 1. J.A.D.E. (jade/)
+##  **Jade Heavy (Preliminary)**
 
-J.A.D.E. (Just Another Digital Entity) é uma agente de inteligência artificial multimodal projetada para interações naturais via texto, áudio e imagem. Ela utiliza a API da Groq para processamento rápido de linguagem e integra modelos especializados para visão computacional e síntese de voz.
+**Jade Heavy** is an advanced agent orchestration architecture combining **Tree of Thoughts (ToT)**, **Mixture of Agents (MoA)**, and **Chain of Thought (CoT)** methodologies to solve complex, high-reasoning problems.
 
-### 🌟 Funcionalidades
+###  Key Architecture
+- **Orchestration**: Integrates multiple reasoning paths (ToT) with collaborative agent synthesis (MoA) and step-by-step logic (CoT).
+- **Goal**: Tackle difficult benchmarks and real-world problems that typically stump single-model approaches.
 
-- **Interação Multimodal**:
-  - **Texto**: Chat conversacional inteligente.
-  - **Áudio**: Transcrição de voz usando Whisper (via API Groq) e resposta via texto e áudio.
-  - **Imagem**: Análise e descrição de imagens utilizando modelos BLIP, permitindo perguntas contextuais sobre o conteúdo visual.
-- **Text-to-Speech (TTS)**: Respostas faladas utilizando `gTTS` (Google Text-to-Speech).
-- **Memória de Longo Prazo (Simplificada)**: Mantém o contexto da conversa ativo, gerenciando o histórico para otimizar tokens.
-- **Integração Google Colab**: Projetada com suporte nativo para upload de arquivos (`files.upload`) em ambientes notebook.
+### 📊Preliminary Results
+Jade Heavy has demonstrated state-of-the-art performance even when utilizing open-source models:
 
-### 🛠️ Instalação e Uso (J.A.D.E.)
+- **Jade Heavy Low (3 Branches)**: 
+  - Achieved approximately **87% accuracy** on **GPQA Diamond**.
+  - *Context*: The open-source models typically perform between **60-70%** on this benchmark in the tests.
+  
+- **Jade Heavy High (7 Branches)**: 
+  - Currently reaching **94-95% accuracy** on subset sample tests.
 
-1.  Instale as dependências:
+---
+
+## 1. J.A.D.E. (jade/)
+
+**J.A.D.E. (Joint Agent Decision Engine)** is a multimodal AI agent designed for natural interaction via text, audio, and images. It orchestrates specialized models for computer vision and voice synthesis, powered by Groq's LLMs, Openrouter and Mistral.
+
+###  Features
+
+- **Multimodal Interaction**:
+  - **Text**: Intelligent conversational chat.
+  - **Audio**: Voice transcription using Whisper (via Groq API) and spoken responses.
+  - **Image**: Visual analysis and description using BLIP models, allowing for contextual questions about images.
+- **Text-to-Speech (TTS)**: Natural spoken responses using `gTTS` (Google Text-to-Speech).
+- **Memory Management**: Sliding window context management to optimize token usage while maintaining conversation history.
+- **Colab Integration**: Native support for file uploads and audio processing within Google Colab environments.
+
+### 🛠️ Installation & Usage
+
+1.  Install dependencies:
     ```bash
     pip install -r jade/requirements.txt
     ```
-2.  Configure a chave da API:
+2.  Set up your API key:
     ```bash
-    export GROQ_API_KEY="sua_chave_aqui"
+    export GROQ_API_KEY="your_key_here"
     ```
-3.  Execute:
+3.  Run the agent:
     ```bash
     python jade/main.py
     ```
 
 ---
 
-## 👨‍💻 2. CodeJade (code_jade/)
+## 2. CodeJade (code_jade/)
 
-CodeJade é um assistente de programação avançado, projetado para atuar como um "pair programmer" inteligente, ideal para ambientes **Google Colab (ColabVM)** ou localmente.
+**CodeJade** is an advanced coding assistant acting as an intelligent "pair programmer." It uses a ReAct (Reasoning + Acting) loop to autonomously solve programming tasks, debug code, and manage files.
 
-### 🌟 Funcionalidades
+### Features
 
-- **Assistente de Código (ReAct)**: Utiliza um ciclo de raciocínio (Thought/Action/Observation) para resolver tarefas complexas.
-- **Ferramentas Integradas**: Execução de shell, manipulação de arquivos e execução de Python.
-- **Code Reviewer**: Um módulo de segurança que analisa o código gerado antes de salvar.
-- **Integração Groq**: Utiliza modelos Llama 3 para inferência rápida.
+- **ReAct Agent**: cycles through **Thought**, **Action**, and **Observation** to solve complex engineering tasks.
+- **Integrated Toolbelt**:
+  - **Shell Execution**: Run bash commands safely.
+  - **File Manipulation**: Read, write, and manage codebase files.
+  - **Python Execution**: Run Python scripts in a sandboxed environment.
+- **Code Reviewer**: A built-in security module that reviews generated code for quality and safety before applying changes to the file system.
+- **Environment**: Optimized for **Google Colab (ColabVM)** and VM development.
 
-### 🛠️ Instalação e Uso (CodeJade)
+### 🛠️ Installation & Usage
 
-1.  Instale as dependências:
+1.  Install dependencies:
     ```bash
     pip install -r code_jade/requirements.txt
     ```
-2.  Configure a chave da API (suporta `google.colab.userdata`):
+2.  Set up your API key:
     ```bash
-    export GROQ_API_KEY="sua_chave_aqui"
+    export GROQ_API_KEY="your_key_here"
     ```
-3.  Execute:
+3.  Run the assistant:
     ```bash
     python code_jade/main.py
     ```
 
 ---
 
-## 📚 3. JadeScholar (JadeScholar/)
+## 3. JadeScholar (JadeScholar/)
 
-**Agente Acadêmico e de Pesquisa**
-- Focado em processamento de documentos e geração de material de estudo.
-- Gera resumos, flashcards (Anki), podcasts e mapas mentais.
+**JadeScholar** is a dedicated academic and research agent designed to transform raw information into structured educational materials.
+
+###  Features
+
+- **Knowledge Graph Generation**: Creates visual mind maps connecting complex concepts.
+- **Multi-Source Ingestion**: Processes PDFs, text files, YouTube videos, and web search results.
+- **Educational Output**:
+  - **Summaries & Debates**: Generates comprehensive summaries and simulated debates between AI personas.
+  - **Flashcards**: Automatically creates Anki decks (`.apkg`) for spaced repetition learning.
+  - **Podcasts**: Synthesizes audio discussions for on-the-go learning.
+  - **Quizzes**: Generates assessment materials to test understanding.
