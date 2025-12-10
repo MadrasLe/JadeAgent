@@ -25,7 +25,7 @@ The system implements a hybrid architecture:
 ### Preliminary Benchmarks (GPQA Diamond)
 *Performance metrics using open-source models(kimi k2/gpt 120b oss/DeepSeek/Mistral):*
 
-*   **Jade Heavy Low(Without Tool) (3 Branches)**:
+*   **Jade Heavy Low(Without Tool) (3-5 Branches)**:
     *   **Accuracy**: **~85-87%**
     *   **Significance**: Achieves results comparable to proprietary frontier models, significantly outperforming the 60-70% baseline of the underlying base models.
 *   **Jade Heavy High(with Tools) (7 Branches)**:
