@@ -28,11 +28,6 @@ The system implements a hybrid architecture:
 *   **Jade Heavy Low(Without Tool) (3-5 Branches)**:
     *   **Accuracy**: **~85-87%**
     *   **Significance**: Achieves results comparable to proprietary frontier models, significantly outperforming the 60-70% baseline of the underlying base models.
-*   **Jade Heavy High(with Tools) (7 Branches)**:
-    *   **Accuracy**: **94-95%** (on subset samples)
-    *   **Mechanism**: The higher branch count increases the probability of finding a correct solution path in the search space, which the consensus mechanism then selects.
-
----
 
 ## 🧩 Technical Architecture by Module
 
