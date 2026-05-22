@@ -1,2 +1,0 @@
-phase 1: draft persisted before crash
-phase 2: recovered worker completed artifact

@@ -1,5 +1,0 @@
-- Define a clear Task class with attributes (id, name, dependencies, status) and validation logic.  
-- Implement a dependency resolver that topologically sorts tasks and detects cycles at runtime.  
-- Provide JSON‑based persistence layer (load/save) with schema versioning and atomic writes.  
-- Expose a minimal CLI (add, list, run, delete) using argparse with helpful error messages and exit codes.  
-- Ensure unit‑test coverage ≥ 90 % for core logic, CLI integration tests, and JSON round‑trip fidelity.
