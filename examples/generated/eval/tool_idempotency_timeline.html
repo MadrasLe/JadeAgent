@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JGX Timeline eval_tool_idempotency_20260514_233135_80c35a45_1</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, Segoe UI, Arial, sans-serif; }
+    body { margin: 0; background: #f7f7f4; color: #20201d; }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 20px 56px; }
+    header { border-bottom: 1px solid #d9d5ca; margin-bottom: 24px; padding-bottom: 16px; }
+    h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: 0; }
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; font-size: 14px; color: #4d4b45; }
+    .pill { border: 1px solid #cbc6ba; border-radius: 6px; padding: 6px 8px; background: #fffdfa; }
+    .item { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; margin: 0 0 12px; }
+    .index { width: 32px; height: 32px; border-radius: 50%; background: #283618; color: white; display: grid; place-items: center; font-weight: 700; }
+    .body { background: #fffdfa; border: 1px solid #d9d5ca; border-radius: 8px; padding: 14px; }
+    .meta { color: #716d64; font-size: 13px; margin-bottom: 4px; }
+    h2 { font-size: 18px; margin: 0 0 6px; letter-spacing: 0; }
+    h2 span { color: #6b705c; font-size: 13px; font-weight: 600; }
+    p { margin: 0 0 10px; }
+    pre { overflow: auto; background: #272822; color: #f8f8f2; border-radius: 6px; padding: 10px; font-size: 12px; line-height: 1.45; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>JGX Timeline</h1>
+    <div class="summary">
+      <span class="pill">run_id: eval_tool_idempotency_20260514_233135_80c35a45_1</span>
+      <span class="pill">events: 20</span>
+      <span class="pill">snapshots: 14</span>
+      <span class="pill">latest: COMPLETED</span>
+    </div>
+  </header>
+  <article class='item'><div class='index'>1</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 0 | event</div><h2>NEW <span>run_started</span></h2><p>agent run started</p><pre>{
+  &quot;task&quot;: &quot;Call the side-effect tool exactly once.&quot;
+}</pre></div></article><article class='item'><div class='index'>2</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 0 | snapshot</div><h2>PLANNING <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 1,
+  &quot;metadata&quot;: {
+    &quot;task&quot;: &quot;Call the side-effect tool exactly once.&quot;
+  },
+  &quot;snapshot_id&quot;: &quot;bda8fad1ff7b450b94f07f6a60bb4913&quot;
+}</pre></div></article><article class='item'><div class='index'>3</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 0 | event</div><h2>PLANNING <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;bda8fad1ff7b450b94f07f6a60bb4913&quot;
+}</pre></div></article><article class='item'><div class='index'>4</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>AWAITING_MODEL <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 1,
+  &quot;metadata&quot;: {},
+  &quot;snapshot_id&quot;: &quot;43111688e1764efaa2af086129fb2c41&quot;
+}</pre></div></article><article class='item'><div class='index'>5</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>AWAITING_MODEL <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;43111688e1764efaa2af086129fb2c41&quot;
+}</pre></div></article><article class='item'><div class='index'>6</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>OBSERVING <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 3,
+  &quot;metadata&quot;: {
+    &quot;finish_reason&quot;: &quot;stop&quot;,
+    &quot;has_tool_calls&quot;: true,
+    &quot;model&quot;: &quot;scripted-eval&quot;
+  },
+  &quot;snapshot_id&quot;: &quot;5064dc39c14f42ef9de4cc19c94ec0e7&quot;
+}</pre></div></article><article class='item'><div class='index'>7</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>OBSERVING <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;5064dc39c14f42ef9de4cc19c94ec0e7&quot;
+}</pre></div></article><article class='item'><div class='index'>8</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>READY_TOOL <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 3,
+  &quot;metadata&quot;: {},
+  &quot;pending_tool&quot;: &quot;eval_side_effect_tool&quot;,
+  &quot;snapshot_id&quot;: &quot;e83e187e067e41bb9e4857ae289a53af&quot;
+}</pre></div></article><article class='item'><div class='index'>9</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>READY_TOOL <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;e83e187e067e41bb9e4857ae289a53af&quot;
+}</pre></div></article><article class='item'><div class='index'>10</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>TOOL_RESULT <span>tool_result_recorded</span></h2><p>tool result recorded for idempotent replay</p><pre>{
+  &quot;idempotency_key&quot;: &quot;383fe4cdd2ffc2e34fb180d5c9c1bd54ba17c2e0e2f3e1a9c25ed5e1e9b4312c&quot;,
+  &quot;result&quot;: &quot;side-effect:x:1&quot;,
+  &quot;reused&quot;: false,
+  &quot;tool_call&quot;: {
+    &quot;arguments&quot;: {
+      &quot;value&quot;: &quot;x&quot;
+    },
+    &quot;id&quot;: &quot;stable_eval_call&quot;,
+    &quot;name&quot;: &quot;eval_side_effect_tool&quot;
+  },
+  &quot;tool_name&quot;: &quot;eval_side_effect_tool&quot;
+}</pre></div></article><article class='item'><div class='index'>11</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>OBSERVING <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 4,
+  &quot;metadata&quot;: {},
+  &quot;snapshot_id&quot;: &quot;303065bdba014fd48f638a830bdcd99e&quot;
+}</pre></div></article><article class='item'><div class='index'>12</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>OBSERVING <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;303065bdba014fd48f638a830bdcd99e&quot;
+}</pre></div></article><article class='item'><div class='index'>13</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>AWAITING_MODEL <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 4,
+  &quot;metadata&quot;: {},
+  &quot;snapshot_id&quot;: &quot;acb27024be2d48e89cc5aab8f1c706eb&quot;
+}</pre></div></article><article class='item'><div class='index'>14</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>AWAITING_MODEL <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;acb27024be2d48e89cc5aab8f1c706eb&quot;
+}</pre></div></article><article class='item'><div class='index'>15</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>COMPLETED <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 6,
+  &quot;metadata&quot;: {
+    &quot;answer&quot;: &quot;done&quot;
+  },
+  &quot;snapshot_id&quot;: &quot;800ced68741148acb9cfe5f21d950000&quot;
+}</pre></div></article><article class='item'><div class='index'>16</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>COMPLETED <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;800ced68741148acb9cfe5f21d950000&quot;
+}</pre></div></article><article class='item'><div class='index'>17</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>COMPLETED <span>run_completed</span></h2><p></p><pre>{}</pre></div></article><article class='item'><div class='index'>18</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 0 | event</div><h2>NEW <span>run_started</span></h2><p>agent run started</p><pre>{
+  &quot;task&quot;: &quot;Call the side-effect tool exactly once.&quot;
+}</pre></div></article><article class='item'><div class='index'>19</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 0 | snapshot</div><h2>PLANNING <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 1,
+  &quot;metadata&quot;: {
+    &quot;task&quot;: &quot;Call the side-effect tool exactly once.&quot;
+  },
+  &quot;snapshot_id&quot;: &quot;835698b7561245f98f91f528ec4c83ea&quot;
+}</pre></div></article><article class='item'><div class='index'>20</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 0 | event</div><h2>PLANNING <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;835698b7561245f98f91f528ec4c83ea&quot;
+}</pre></div></article><article class='item'><div class='index'>21</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>AWAITING_MODEL <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 1,
+  &quot;metadata&quot;: {},
+  &quot;snapshot_id&quot;: &quot;ffa65e423fbb4c83b0650b94520a4169&quot;
+}</pre></div></article><article class='item'><div class='index'>22</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>AWAITING_MODEL <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;ffa65e423fbb4c83b0650b94520a4169&quot;
+}</pre></div></article><article class='item'><div class='index'>23</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>OBSERVING <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 3,
+  &quot;metadata&quot;: {
+    &quot;finish_reason&quot;: &quot;stop&quot;,
+    &quot;has_tool_calls&quot;: true,
+    &quot;model&quot;: &quot;scripted-eval&quot;
+  },
+  &quot;snapshot_id&quot;: &quot;bd9bc640cfa34b1fabffcad8c30ae3a2&quot;
+}</pre></div></article><article class='item'><div class='index'>24</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>OBSERVING <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;bd9bc640cfa34b1fabffcad8c30ae3a2&quot;
+}</pre></div></article><article class='item'><div class='index'>25</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>READY_TOOL <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 3,
+  &quot;metadata&quot;: {},
+  &quot;pending_tool&quot;: &quot;eval_side_effect_tool&quot;,
+  &quot;snapshot_id&quot;: &quot;c6705c9f811b4b19921940ce3edaf73d&quot;
+}</pre></div></article><article class='item'><div class='index'>26</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>READY_TOOL <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;c6705c9f811b4b19921940ce3edaf73d&quot;
+}</pre></div></article><article class='item'><div class='index'>27</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>TOOL_RESULT <span>tool_result_reused</span></h2><p>tool result reused from idempotency record</p><pre>{
+  &quot;idempotency_key&quot;: &quot;383fe4cdd2ffc2e34fb180d5c9c1bd54ba17c2e0e2f3e1a9c25ed5e1e9b4312c&quot;,
+  &quot;result&quot;: &quot;side-effect:x:1&quot;,
+  &quot;reused&quot;: true,
+  &quot;tool_call&quot;: {
+    &quot;arguments&quot;: {
+      &quot;value&quot;: &quot;x&quot;
+    },
+    &quot;id&quot;: &quot;stable_eval_call&quot;,
+    &quot;name&quot;: &quot;eval_side_effect_tool&quot;
+  },
+  &quot;tool_name&quot;: &quot;eval_side_effect_tool&quot;
+}</pre></div></article><article class='item'><div class='index'>28</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>OBSERVING <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 4,
+  &quot;metadata&quot;: {},
+  &quot;snapshot_id&quot;: &quot;af4bc40ff5e0477d9b82c54d5b2d4fa0&quot;
+}</pre></div></article><article class='item'><div class='index'>29</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>OBSERVING <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;af4bc40ff5e0477d9b82c54d5b2d4fa0&quot;
+}</pre></div></article><article class='item'><div class='index'>30</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>AWAITING_MODEL <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 4,
+  &quot;metadata&quot;: {},
+  &quot;snapshot_id&quot;: &quot;de0ff30f53b842d3a40e3c91dbcff6c6&quot;
+}</pre></div></article><article class='item'><div class='index'>31</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>AWAITING_MODEL <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;de0ff30f53b842d3a40e3c91dbcff6c6&quot;
+}</pre></div></article><article class='item'><div class='index'>32</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | snapshot</div><h2>COMPLETED <span>snapshot</span></h2><p>runtime snapshot saved</p><pre>{
+  &quot;messages&quot;: 6,
+  &quot;metadata&quot;: {
+    &quot;answer&quot;: &quot;done&quot;
+  },
+  &quot;snapshot_id&quot;: &quot;3e4276e3087b49ea9f2d20e9ce898d2e&quot;
+}</pre></div></article><article class='item'><div class='index'>33</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>COMPLETED <span>checkpoint</span></h2><p>state checkpoint saved</p><pre>{
+  &quot;snapshot_id&quot;: &quot;3e4276e3087b49ea9f2d20e9ce898d2e&quot;
+}</pre></div></article><article class='item'><div class='index'>34</div><div class='body'><div class='meta'>2026-05-14T23:31:35 | step 1 | event</div><h2>COMPLETED <span>run_completed</span></h2><p></p><pre>{}</pre></div></article>
+</main>
+</body>
+</html>

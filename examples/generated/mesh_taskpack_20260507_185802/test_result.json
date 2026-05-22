@@ -1,0 +1,6 @@
+{
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.032s\n\nOK\n",
+  "command": "python -m unittest discover -s tests -p test_*.py"
+}

@@ -1,0 +1,59 @@
+{
+  "workflow_id": "20260507_193016",
+  "run_id": "crash_recovery_20260507_193016",
+  "state_path": "C:\\Users\\gabri\\JadeAgent\\examples\\generated\\jgx_crash_recovery_20260507_193016\\state.sqlite3",
+  "output_path": "C:\\Users\\gabri\\JadeAgent\\examples\\generated\\jgx_crash_recovery_20260507_193016\\recovered_artifact.txt",
+  "task_id": "2952c5d8d98c4087a437bf7db444e761",
+  "first_record_state": "completed",
+  "final_record_state": "completed",
+  "result_state": "completed",
+  "result_output": "{\"status\": \"completed\", \"run_id\": \"crash_recovery_20260507_193016\", \"output_path\": \"C:\\\\Users\\\\gabri\\\\JadeAgent\\\\examples\\\\generated\\\\jgx_crash_recovery_20260507_193016\\\\recovered_artifact.txt\", \"resumed_from\": \"d9afef1e37e94120a0c908046e8b9592\"}",
+  "attempts": [
+    {
+      "worker": "worker_before_crash",
+      "action": "crashed_after_checkpoint"
+    },
+    {
+      "worker": "worker_after_recovery",
+      "action": "resumed_and_completed",
+      "resumed_from": "d9afef1e37e94120a0c908046e8b9592"
+    }
+  ],
+  "inspect": {
+    "magic": "JGX1",
+    "format": "jade-governed-execution",
+    "schema_version": "1.0",
+    "run_id": "crash_recovery_20260507_193016",
+    "task_id": "2952c5d8d98c4087a437bf7db444e761",
+    "agent_id": "worker_after_recovery",
+    "tenant_id": "",
+    "capability": "recover_document",
+    "backend": "",
+    "event_count": 9,
+    "snapshot_count": 6,
+    "latest_snapshot_id": "79c1e6a7cc704cac8dc1e9c3fd2924e2",
+    "latest_phase": "COMPLETED",
+    "latest_step": 2,
+    "payload_count": 0
+  },
+  "event_types": [
+    "demo_started",
+    "mesh_task_started",
+    "checkpoint",
+    "simulated_crash",
+    "checkpoint",
+    "mesh_task_started",
+    "checkpoint",
+    "recovered_and_completed",
+    "checkpoint"
+  ],
+  "snapshot_phases": [
+    "RUNNING",
+    "CHECKPOINTING",
+    "FAILED",
+    "RUNNING",
+    "COMPLETED",
+    "COMPLETED"
+  ],
+  "artifact": "phase 1: draft written before crash\nphase 2: recovered worker completed artifact\n"
+}

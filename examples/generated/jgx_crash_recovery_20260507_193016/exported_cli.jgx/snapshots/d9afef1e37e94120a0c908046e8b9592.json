@@ -1,0 +1,25 @@
+{
+  "created_at": 1778193016.3150115,
+  "graph": null,
+  "last_observation": {},
+  "memory_refs": [],
+  "mesh": null,
+  "metadata": {
+    "output_path": "C:\\Users\\gabri\\JadeAgent\\examples\\generated\\jgx_crash_recovery_20260507_193016\\recovered_artifact.txt",
+    "stage": "draft_written",
+    "worker": "worker_before_crash"
+  },
+  "model_state_ref": null,
+  "pending_tool_call": null,
+  "phase": "CHECKPOINTING",
+  "plan": [],
+  "session": {
+    "backend": "",
+    "created_at": 1778193016.3150115,
+    "messages": [],
+    "metadata": {},
+    "snapshot_id": "b463a2c61499484e8e490f16df5d77ef"
+  },
+  "snapshot_id": "d9afef1e37e94120a0c908046e8b9592",
+  "step": 1
+}

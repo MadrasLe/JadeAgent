@@ -1,0 +1,26 @@
+{
+  "agent_id": "worker_after_recovery",
+  "backend": "",
+  "capability": "recover_document",
+  "created_at": 1778193016.3221815,
+  "format": "jade-governed-execution",
+  "latest_snapshot_id": "79c1e6a7cc704cac8dc1e9c3fd2924e2",
+  "magic": "JGX1",
+  "memory_scope_hash": "bb1ff3854dc8c3d7a8cba49b6e5fd1c3b8cd6021509328f577662fdab47e9048",
+  "metadata": {
+    "min_trust_tier": "standard",
+    "parent_task_id": "",
+    "requester": "crash_demo_coordinator"
+  },
+  "model_fingerprint": "",
+  "parent_run_id": "",
+  "payload_hash": "",
+  "policy_hash": "",
+  "run_id": "crash_recovery_20260507_193016",
+  "schema_version": "1.0",
+  "state_kind": "mesh_task",
+  "task_id": "2952c5d8d98c4087a437bf7db444e761",
+  "tenant_id": "",
+  "tool_registry_hash": "",
+  "updated_at": 1778203934.6214862
+}

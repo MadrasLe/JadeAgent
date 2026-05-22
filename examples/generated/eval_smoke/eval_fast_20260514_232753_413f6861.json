@@ -1,0 +1,111 @@
+{
+  "suite": "fast",
+  "runs": 1,
+  "token": "20260514_232753_413f6861",
+  "started_at": 1778812073.7469823,
+  "finished_at": 1778812073.8519883,
+  "output_dir": "examples\\generated\\eval_smoke",
+  "aggregate": {
+    "case_runs": 2,
+    "passed": 2,
+    "failed": 0,
+    "success_rate": 1.0,
+    "recovery_success_rate": 0.0,
+    "duplicate_tool_executions": 0,
+    "secret_leak_count": 0,
+    "avg_events_per_run": 13,
+    "avg_snapshots_per_run": 9,
+    "runtime_ms_p50": 30.157,
+    "runtime_ms_p95": 75.153,
+    "restore_latency_ms_p50": 1.375,
+    "restore_latency_ms_p95": 1.375
+  },
+  "results": [
+    {
+      "name": "state_restore",
+      "run_id": "eval_state_restore_20260514_232753_413f6861_1",
+      "run_ids": [
+        "eval_state_restore_20260514_232753_413f6861_1"
+      ],
+      "success": true,
+      "duration_ms": 30.157,
+      "metrics": {
+        "run_id": "eval_state_restore_20260514_232753_413f6861_1",
+        "latest_phase": "COMPLETED",
+        "success": true,
+        "duration_ms": 18.001,
+        "event_count": 6,
+        "snapshot_count": 4,
+        "checkpoint_count": 4,
+        "tool_results_recorded": 0,
+        "tool_results_reused": 0,
+        "duplicate_tool_executions": 0,
+        "recovery_success": false,
+        "audit_complete": true,
+        "event_counts": {
+          "checkpoint": 4,
+          "run_completed": 1,
+          "run_started": 1
+        },
+        "phase_counts": {
+          "AWAITING_MODEL": 1,
+          "COMPLETED": 1,
+          "OBSERVING": 1,
+          "PLANNING": 1
+        },
+        "integrity_ok": true,
+        "secret_leak_count": 0,
+        "event_chain_hash": "837e79c8e7384b64fe75b7cb887e2eb365837d5baf8f12549fef73b9d04cf53d",
+        "restore_latency_ms": 1.375,
+        "restored_message_count": 3
+      },
+      "artifacts": {},
+      "error": "",
+      "repetition": 1
+    },
+    {
+      "name": "tool_idempotency",
+      "run_id": "eval_tool_idempotency_20260514_232753_413f6861_1",
+      "run_ids": [
+        "eval_tool_idempotency_20260514_232753_413f6861_1"
+      ],
+      "success": true,
+      "duration_ms": 75.153,
+      "metrics": {
+        "run_id": "eval_tool_idempotency_20260514_232753_413f6861_1",
+        "latest_phase": "COMPLETED",
+        "success": true,
+        "duration_ms": 59.001,
+        "event_count": 20,
+        "snapshot_count": 14,
+        "checkpoint_count": 14,
+        "tool_results_recorded": 1,
+        "tool_results_reused": 1,
+        "duplicate_tool_executions": 0,
+        "recovery_success": false,
+        "audit_complete": true,
+        "event_counts": {
+          "checkpoint": 14,
+          "run_completed": 2,
+          "run_started": 2,
+          "tool_result_recorded": 1,
+          "tool_result_reused": 1
+        },
+        "phase_counts": {
+          "AWAITING_MODEL": 4,
+          "COMPLETED": 2,
+          "OBSERVING": 4,
+          "PLANNING": 2,
+          "READY_TOOL": 2
+        },
+        "integrity_ok": true,
+        "secret_leak_count": 0,
+        "event_chain_hash": "10c0ee24632ad6b68b7a3a8e82bfe4716e7808c35da213accee28e2d2ed6938c",
+        "side_effect_calls": 1
+      },
+      "artifacts": {},
+      "error": "",
+      "repetition": 1
+    }
+  ]
+}

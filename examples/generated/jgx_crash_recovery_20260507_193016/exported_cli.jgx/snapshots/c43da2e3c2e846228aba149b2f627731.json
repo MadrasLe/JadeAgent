@@ -1,0 +1,26 @@
+{
+  "created_at": 1778193016.3301797,
+  "graph": null,
+  "last_observation": {},
+  "memory_refs": [],
+  "mesh": null,
+  "metadata": {
+    "output_path": "C:\\Users\\gabri\\JadeAgent\\examples\\generated\\jgx_crash_recovery_20260507_193016\\recovered_artifact.txt",
+    "resumed_from_snapshot": "d9afef1e37e94120a0c908046e8b9592",
+    "stage": "completed_after_recovery",
+    "worker": "worker_after_recovery"
+  },
+  "model_state_ref": null,
+  "pending_tool_call": null,
+  "phase": "COMPLETED",
+  "plan": [],
+  "session": {
+    "backend": "",
+    "created_at": 1778193016.3301797,
+    "messages": [],
+    "metadata": {},
+    "snapshot_id": "d6083ed1f30f4c778d88c4f0aca7ba93"
+  },
+  "snapshot_id": "c43da2e3c2e846228aba149b2f627731",
+  "step": 2
+}

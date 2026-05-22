@@ -1,0 +1,35 @@
+{
+  "created_at": 1778193016.333181,
+  "graph": null,
+  "last_observation": {},
+  "memory_refs": [],
+  "mesh": {
+    "attempt": 2,
+    "lease_deadline": 0.0,
+    "lease_owner": "worker_after_recovery",
+    "shard_key": "recover_document",
+    "task_metadata": {
+      "capability": "recover_document",
+      "error": null,
+      "memory_scope": "",
+      "output": "{\"status\": \"completed\", \"run_id\": \"crash_recovery_20260507_193016\", \"output_path\": \"C:\\\\Users\\\\gabri\\\\JadeAgent\\\\examples\\\\generated\\\\jgx_crash_recovery_20260507_193016\\\\recovered_artifact.txt\", \"resumed_from\": \"d9afef1e37e94120a0c908046e8b9592\"}",
+      "task_id": "2952c5d8d98c4087a437bf7db444e761",
+      "tenant_id": ""
+    },
+    "task_state": "completed"
+  },
+  "metadata": {},
+  "model_state_ref": null,
+  "pending_tool_call": null,
+  "phase": "COMPLETED",
+  "plan": [],
+  "session": {
+    "backend": "",
+    "created_at": 1778193016.333181,
+    "messages": [],
+    "metadata": {},
+    "snapshot_id": "d35df431d4f64ea68b4b88960484731e"
+  },
+  "snapshot_id": "79c1e6a7cc704cac8dc1e9c3fd2924e2",
+  "step": 2
+}
