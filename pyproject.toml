@@ -17,6 +17,9 @@ dependencies = [
     "openai>=1.0",       # OpenAI-compatible API client
 ]
 
+[project.scripts]
+jade = "jadeagent.cli:main"
+
 [project.optional-dependencies]
 local = [
     "megagemm",          # Local GPU inference
@@ -25,10 +28,18 @@ memory = [
     "chromadb>=0.4",
     "sentence-transformers>=2.0",
 ]
+network = [
+    "redis>=5.0",
+]
+sandbox = [
+    "e2b-code-interpreter>=1.0",
+]
 all = [
     "megagemm",
     "chromadb>=0.4",
     "sentence-transformers>=2.0",
+    "redis>=5.0",
+    "e2b-code-interpreter>=1.0",
 ]
 dev = [
     "pytest>=7.0",
