@@ -181,6 +181,7 @@ class SkillGenerator:
                     func=func,
                     name=func_name,
                     description=description,
+                    resource_refs=[f"tool.execute:{func_name}"],
                 )
                 # Attach source code for SkillLibrary persistence
                 tool._source_code = raw_code

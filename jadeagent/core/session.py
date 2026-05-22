@@ -12,6 +12,7 @@ from typing import Iterator
 
 from .types import Message, Response, StreamChunk, ToolCall, ToolSchema, Role
 from ..backends.base import LLMBackend
+from ..state.snapshot import SessionSnapshot
 
 logger = logging.getLogger("jadeagent.core.session")
 
@@ -121,6 +122,30 @@ class Session:
         """Clear conversation history, keeping system prompt."""
         system_msgs = [m for m in self.messages if m.role == Role.SYSTEM]
         self.messages = system_msgs
+
+    def snapshot(self, metadata: dict | None = None) -> SessionSnapshot:
+        """Capture restorable conversation state for a .jgx capsule."""
+        return SessionSnapshot.from_messages(
+            self.messages,
+            backend=self.backend.name,
+            metadata=dict(metadata or {}),
+        )
+
+    def restore_snapshot(self, snapshot: SessionSnapshot | dict):
+        """Restore this session's message history from a snapshot."""
+        session_snapshot = (
+            snapshot
+            if isinstance(snapshot, SessionSnapshot)
+            else SessionSnapshot.from_dict(snapshot)
+        )
+        self.messages = session_snapshot.restore_messages()
+
+    @classmethod
+    def restore(cls, backend: LLMBackend, snapshot: SessionSnapshot | dict) -> "Session":
+        """Create a new Session from a saved conversation snapshot."""
+        session = cls(backend)
+        session.restore_snapshot(snapshot)
+        return session
 
     def fork(self) -> Session:
         """Create a branch of this session (for tree-of-thought)."""

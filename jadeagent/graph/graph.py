@@ -13,10 +13,15 @@ Inspired by LangGraph, implemented for JadeAgent.
 from __future__ import annotations
 
 import logging
+import uuid
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
 from .state import START, END, merge_state
+from ..state.events import JadeStateEvent
+from ..state.manifest import JadeStateManifest, canonical_json_hash
+from ..state.snapshot import AgentRuntimeSnapshot, GraphRuntimeSnapshot
+from ..state.store import StateStore
 
 logger = logging.getLogger("jadeagent.graph")
 
@@ -82,7 +87,14 @@ class CompiledGraph:
 
         return None
 
-    def run(self, initial_state: dict, verbose: bool = False) -> dict:
+    def run(
+        self,
+        initial_state: dict,
+        verbose: bool = False,
+        state_store: StateStore | None = None,
+        run_id: str | None = None,
+        manifest: JadeStateManifest | None = None,
+    ) -> dict:
         """
         Execute the graph from START to END.
 
@@ -94,6 +106,31 @@ class CompiledGraph:
             Final state after reaching END.
         """
         state = dict(initial_state)
+        active_run_id = ""
+        if state_store is not None:
+            manifest = manifest or JadeStateManifest(
+                run_id=run_id or uuid.uuid4().hex,
+                state_kind="graph",
+                capability="graph",
+                policy_hash="",
+                tool_registry_hash="",
+                memory_scope_hash="",
+                metadata={
+                    "nodes": list(self.nodes.keys()),
+                    "edges_hash": canonical_json_hash({
+                        "fixed": [(edge.source, edge.target) for edge in self.edges],
+                        "conditional": [edge.source for edge in self.conditional_edges],
+                    }),
+                },
+            )
+            state_store.create_run(manifest)
+            active_run_id = manifest.run_id
+            state_store.append_event(active_run_id, JadeStateEvent(
+                event_type="graph_started",
+                run_id=active_run_id,
+                phase="GRAPH_START",
+                message="graph execution started",
+            ))
         current = self._get_next(START, state)
 
         if current is None:
@@ -105,6 +142,25 @@ class CompiledGraph:
             if current == END:
                 if verbose:
                     print(f"  [OK] Reached END after {iteration} steps")
+                if state_store is not None and active_run_id:
+                    snapshot = AgentRuntimeSnapshot(
+                        phase="COMPLETED",
+                        step=iteration,
+                        graph=GraphRuntimeSnapshot(
+                            current_node=END,
+                            variables=state,
+                            iteration=iteration,
+                        ),
+                    )
+                    state_store.save_snapshot(active_run_id, snapshot)
+                    state_store.append_event(active_run_id, JadeStateEvent(
+                        event_type="graph_completed",
+                        run_id=active_run_id,
+                        phase="COMPLETED",
+                        step=iteration,
+                        message="graph execution completed",
+                        payload={"snapshot_id": snapshot.snapshot_id},
+                    ))
                 return state
 
             if current not in self.nodes:
@@ -118,7 +174,30 @@ class CompiledGraph:
 
             # Execute node
             node_fn = self.nodes[current]
-            result = node_fn(state)
+            try:
+                result = node_fn(state)
+            except Exception as exc:
+                if state_store is not None and active_run_id:
+                    snapshot = AgentRuntimeSnapshot(
+                        phase="FAILED",
+                        step=iteration + 1,
+                        graph=GraphRuntimeSnapshot(
+                            current_node=current,
+                            variables=state,
+                            iteration=iteration + 1,
+                        ),
+                        metadata={"error": repr(exc)},
+                    )
+                    state_store.save_snapshot(active_run_id, snapshot)
+                    state_store.append_event(active_run_id, JadeStateEvent(
+                        event_type="graph_failed",
+                        run_id=active_run_id,
+                        phase="FAILED",
+                        step=iteration + 1,
+                        message=repr(exc),
+                        payload={"snapshot_id": snapshot.snapshot_id, "node": current},
+                    ))
+                raise
 
             # Merge result into state
             if result is not None and isinstance(result, dict):
@@ -132,9 +211,50 @@ class CompiledGraph:
                     f"Add an edge: graph.add_edge('{current}', 'next_node')"
                 )
 
+            if state_store is not None and active_run_id:
+                snapshot = AgentRuntimeSnapshot(
+                    phase="GRAPH_NODE",
+                    step=iteration + 1,
+                    graph=GraphRuntimeSnapshot(
+                        current_node=current,
+                        next_nodes=[next_node],
+                        variables=state,
+                        iteration=iteration + 1,
+                    ),
+                )
+                state_store.save_snapshot(active_run_id, snapshot)
+                state_store.append_event(active_run_id, JadeStateEvent(
+                    event_type="checkpoint",
+                    run_id=active_run_id,
+                    phase="GRAPH_NODE",
+                    step=iteration + 1,
+                    message="graph checkpoint saved",
+                    payload={"node": current, "next_node": next_node, "snapshot_id": snapshot.snapshot_id},
+                ))
+
             current = next_node
 
         logger.warning(f"Graph hit max iterations ({self.max_iterations})")
+        if state_store is not None and active_run_id:
+            snapshot = AgentRuntimeSnapshot(
+                phase="FAILED",
+                step=self.max_iterations,
+                graph=GraphRuntimeSnapshot(
+                    current_node=current or "",
+                    variables=state,
+                    iteration=self.max_iterations,
+                ),
+                metadata={"error": f"Graph hit max iterations ({self.max_iterations})"},
+            )
+            state_store.save_snapshot(active_run_id, snapshot)
+            state_store.append_event(active_run_id, JadeStateEvent(
+                event_type="graph_failed",
+                run_id=active_run_id,
+                phase="FAILED",
+                step=self.max_iterations,
+                message="graph hit max iterations",
+                payload={"snapshot_id": snapshot.snapshot_id},
+            ))
         return state
 
 

@@ -187,7 +187,12 @@ class SkillLibrary:
                 f"No callable function found in skill '{name}'"
             )
 
-        return Tool(func, name=name, description=info["description"])
+        return Tool(
+            func,
+            name=name,
+            description=info["description"],
+            resource_refs=[f"tool.execute:{name}"],
+        )
 
     def get(self, name: str) -> Tool | None:
         """Get a specific skill by name."""

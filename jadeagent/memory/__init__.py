@@ -1,11 +1,22 @@
-"""Memory systems for persistent agent context."""
+"""Memory systems for persistent and shared agent context."""
 
 from .base import BaseMemory
 from .buffer import BufferMemory
+from .router import InMemorySharedMemoryStore, MemoryRouter, MemoryStore, RedisMemoryStore
 
-__all__ = ["BaseMemory", "BufferMemory"]
+__all__ = [
+    "BaseMemory",
+    "BufferMemory",
+    "MemoryStore",
+    "InMemorySharedMemoryStore",
+    "RedisMemoryStore",
+    "MemoryRouter",
+    "ShoreStoneMemory",
+]
 
-# Lazy import for ShoreStone (requires chromadb + sentence-transformers)
+
 def ShoreStoneMemory(*args, **kwargs):
+    """Lazy import for optional vector memory dependencies."""
     from .shorestone import ShoreStoneMemory as _SSM
+
     return _SSM(*args, **kwargs)
